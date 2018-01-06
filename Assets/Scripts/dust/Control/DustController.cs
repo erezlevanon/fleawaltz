@@ -14,7 +14,7 @@ namespace Dust
 		STAY,
 	}
 
-	public abstract class DustContoller : MonoBehaviour
+	public abstract class DustController : MonoBehaviour
 	{
 		/// <summary>
 		/// Get the Action to preform at this time.

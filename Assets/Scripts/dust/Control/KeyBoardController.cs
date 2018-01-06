@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dust
 {
 
-	public class KeyBoardController : DustContoller
+	public class KeyBoardController : DustController
 	{
 
 		public KeyCode rightKey;

@@ -25,10 +25,8 @@ public class DustCharecter : MonoBehaviour {
 	void FixedUpdate () {
 			Vector2 velocity = body.velocity;
 			Action action = controller.getAction ();
-			if (action == Action.JUMP && !isJumping) {
+			if (action == Action.JUMP) {
 				velocity.y = verticalMultiplier;
-				isJumping = true;
-				Debug.Log ("JUMP");
 			} else if (action == Action.RIGHT) {
 				velocity.x = horizontalMultiplier;
 			} else if (action == Action.LEFT) {
@@ -38,13 +36,5 @@ public class DustCharecter : MonoBehaviour {
 			}
 			body.velocity = velocity;
 	}
-
-		void OnCollisionEnter2d(Collider2D coll) {
-			Debug.Log ("COL!");
-			Debug.Log(coll.gameObject.tag);
-			if (isJumping && coll.gameObject.tag == "Ground") {
-				isJumping = false;
-			}
-		}
 }
 }

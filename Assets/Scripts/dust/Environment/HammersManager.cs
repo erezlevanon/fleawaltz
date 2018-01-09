@@ -7,7 +7,7 @@ namespace Dust
 {
 	public class HammersManager : MonoBehaviour
 	{
-		[Header("Song")]
+		[Header ("Song")]
 		public TextAsset sourceMidiFile;
 
 		public List<Hammer> hammers;
@@ -17,19 +17,41 @@ namespace Dust
 		MidiFileContainer song;
 		MidiTrackSequencer sequencer;
 
-	// Use this for initialization
-	void Start ()
+		void ResetAndPlay ()
 		{
-			hammersDict_ = new Dictionary<Hammer.NOTE, Hammer>();
+			//audio.Play ();
+			sequencer = new MidiTrackSequencer (song.tracks [0], song.division, 131.0f);
+			ApplyMessages (sequencer.Start ());
+		}
+
+		// Use this for initialization
+		IEnumerator Start ()
+		{
+			hammersDict_ = new Dictionary<Hammer.NOTE, Hammer> ();
 			foreach (Hammer hammer in hammers) {
 				hammersDict_ [hammer.getNote ()] = hammer;
 			}
+			song = MidiFileLoader.Load (sourceMidiFile.bytes);
+			yield return new WaitForSeconds (1.0f);
+			ResetAndPlay ();
 		}
-	
-		// Update is called once per frame
+
 		void Update ()
 		{
-		
+			if (sequencer != null && sequencer.Playing) {
+				ApplyMessages (sequencer.Advance (Time.deltaTime));
+			}
+		}
+
+		void ApplyMessages (List<MidiEvent> messages)
+		{
+			if (messages != null) {
+				foreach (var m in messages) {
+					if ((m.status & 0xf0) == 0x90) {
+						Debug.Log (m.data1);
+					}
+				}
+			}
 		}
 	}
 }

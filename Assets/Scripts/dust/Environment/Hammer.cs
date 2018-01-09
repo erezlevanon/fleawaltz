@@ -8,11 +8,33 @@ namespace Dust
 	{
 
 		public enum NOTE {
-			A,
-			B,
-			C,
-			D,
-			E,
+			_3Cs,
+			_3D,
+			_3Ds,
+			_3E,
+			_3F,
+			_3Fs,
+			_3G,
+			_3Gs,
+			_4A,
+			_4As,
+			_4B,
+			_4C,
+			_4Cs,
+			_4D,
+			_4Ds,
+			_4E,
+			_4F,
+			_4Fs,
+			_4G,
+			_4Gs,
+			_5A,
+			_5As,
+			_5B,
+			_5C,
+			_5Cs,
+			_5D,
+			_5Ds,
 		}
 
 		public NOTE note;
@@ -33,6 +55,13 @@ namespace Dust
 
 		public NOTE getNote() {
 			return note;
+		}
+
+		public void HitNote() {
+			Debug.Log ("I'm HIT!");
+			Vector2 pos = this.transform.position;
+			pos.y += 1;
+			this.transform.position = pos;
 		}
 	}
 }

@@ -37,9 +37,10 @@ namespace Dust
 			_5Ds,
 		}
 
+
 		public NOTE note;
 
-
+		public float raise;
 
 		// Use this for initialization
 		void Start ()
@@ -50,7 +51,13 @@ namespace Dust
 		// Update is called once per frame
 		void Update ()
 		{
-		
+			var pos = this.transform.localPosition;
+			if (this.transform.localPosition.y > 0f) {
+				pos.y = pos.y - 0.1f;
+			} else {
+				pos.y = 0f;
+			}
+			this.transform.localPosition = pos;
 		}
 
 		public NOTE getNote() {
@@ -58,9 +65,8 @@ namespace Dust
 		}
 
 		public void HitNote() {
-			Debug.Log ("I'm HIT!");
 			Vector2 pos = this.transform.position;
-			pos.y += 1;
+			pos.y += raise;
 			this.transform.position = pos;
 		}
 	}

@@ -41,7 +41,6 @@ namespace Dust
 			{ 73, Hammer.NOTE._5Cs },
 			{ 74, Hammer.NOTE._5D },
 			{ 75, Hammer.NOTE._5Ds },
-
 		};
 
 		MidiFileContainer song;
@@ -57,7 +56,7 @@ namespace Dust
 		IEnumerator Start ()
 		{
 			hammersDict_ = new Dictionary<Hammer.NOTE, Hammer> ();
-			foreach (Hammer hammer in hammers) {
+			foreach (Hammer hammer in FindObjectsOfType<Hammer>()) {
 				hammersDict_ [hammer.getNote ()] = hammer;
 			}
 			song = MidiFileLoader.Load (sourceMidiFile.bytes);
@@ -79,7 +78,6 @@ namespace Dust
 					if ((m.status & 0xf0) == 0x90) {
 						if (numToNote_.ContainsKey (m.data1)) {
 							if (hammersDict_.ContainsKey (numToNote_ [m.data1])) {
-								Debug.Log ("SHould hit");
 								hammersDict_ [numToNote_ [m.data1]].HitNote ();
 							}
 						}

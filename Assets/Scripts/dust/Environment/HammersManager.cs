@@ -20,7 +20,7 @@ namespace Dust
 		void ResetAndPlay ()
 		{
 			//audio.Play ();
-			sequencer = new MidiTrackSequencer (song.tracks [0], song.division, 131.0f);
+			sequencer = new MidiTrackSequencer (song.tracks [1], song.division, 131.0f);
 			ApplyMessages (sequencer.Start ());
 		}
 
@@ -47,6 +47,8 @@ namespace Dust
 		{
 			if (messages != null) {
 				foreach (var m in messages) {
+					Debug.Log ("msg:");
+					Debug.Log (m.status);
 					if ((m.status & 0xf0) == 0x90) {
 						Debug.Log (m.data1);
 					}

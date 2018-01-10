@@ -25,7 +25,7 @@ public class DustCharecter : MonoBehaviour {
 	void FixedUpdate () {
 			Vector2 velocity = body.velocity;
 			Action action = controller.getAction ();
-			if (action == Action.JUMP) {
+			if (action == Action.JUMP && this.transform.localPosition.y < -1f) {
 				velocity.y = verticalMultiplier;
 			} else if (action == Action.RIGHT) {
 				velocity.x = horizontalMultiplier;
@@ -36,5 +36,14 @@ public class DustCharecter : MonoBehaviour {
 			}
 			body.velocity = velocity;
 	}
+
+		void OnCollisionEnter2D (Collision2D col) {
+			if (col.gameObject.name == "collider") {
+				var vel = this.body.velocity;
+				vel.y = 50f;
+				vel.x = Random.Range(-5f,  5f);
+				this.body.velocity = vel;
+			};
+		}
 }
 }

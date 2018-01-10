@@ -39,8 +39,11 @@ namespace Dust
 
 
 		public NOTE note;
+		public AudioSource noteToPlay;
+
 
 		public float raise;
+
 
 		// Use this for initialization
 		void Start ()
@@ -68,6 +71,8 @@ namespace Dust
 			Vector2 pos = this.transform.position;
 			pos.y += raise;
 			this.transform.position = pos;
+			if (noteToPlay!=null)
+				noteToPlay.Play();
 		}
 	}
 }

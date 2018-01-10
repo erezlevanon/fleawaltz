@@ -67,7 +67,7 @@ namespace Dust
 		void Update ()
 		{
 			if (sequencer != null && sequencer.Playing) {
-				ApplyMessages (sequencer.Advance (Time.deltaTime));
+				ApplyMessages (sequencer.Advance (Time.deltaTime * 1.5f));
 			}
 		}
 

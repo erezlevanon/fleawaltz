@@ -44,11 +44,13 @@ namespace Dust
 
 		public float raise;
 
+		private Animator animator;
+
 
 		// Use this for initialization
 		void Start ()
 		{
-
+			animator = GetComponent<Animator> ();
 		}
 	
 		// Update is called once per frame
@@ -68,10 +70,10 @@ namespace Dust
 		}
 
 		public void HitNote() {
-			Vector2 pos = this.transform.position;
-			pos.y += raise;
-			this.transform.position = pos;
-			if (noteToPlay!=null)
+
+			if (animator != null) 
+				animator.SetTrigger ("Play");
+			if (noteToPlay!= null)
 				noteToPlay.Play();
 		}
 	}

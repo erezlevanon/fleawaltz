@@ -58,7 +58,7 @@ public class DustCharecter : MonoBehaviour {
 	}
 
 		void OnCollisionEnter2D (Collision2D col) {
-			if (col.gameObject.name == "collider") {
+			if (col.gameObject.tag == "hammer") {
 				var vel = this.body.velocity;
 				vel.y = 50f;
 				vel.x = Random.Range(-5f,  5f);

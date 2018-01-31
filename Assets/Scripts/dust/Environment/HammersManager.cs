@@ -12,6 +12,9 @@ namespace Dust
 
 		public List<Hammer> hammers;
 
+		[Header ("Debug")]
+		public bool play_song;
+
 		private Dictionary<Hammer.NOTE, Hammer> hammersDict_;
 		static private Dictionary<int, Hammer.NOTE> numToNote_ = new Dictionary<int, Hammer.NOTE>() {
 			{ 49, Hammer.NOTE._3Cs },
@@ -73,7 +76,7 @@ namespace Dust
 
 		void ApplyMessages (List<MidiEvent> messages)
 		{
-			if (messages != null) {
+			if (messages != null && play_song) {
 				foreach (var m in messages) {
 					if ((m.status & 0xf0) == 0x90) {
 						if (numToNote_.ContainsKey (m.data1)) {

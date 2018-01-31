@@ -21,6 +21,8 @@ public class DustCharecter : MonoBehaviour {
 
 		private float lastTurbo;
 
+		private bool alive;
+
 
 		private Animator animator;
 
@@ -30,10 +32,14 @@ public class DustCharecter : MonoBehaviour {
 			animator = GetComponent<Animator> ();
 			lastTurbo = Time.time;
 			facing = 1;
+			alive = true;
+
 	}
 			
 	// Update is called once per frame
 	void FixedUpdate () {
+			if (!alive)
+				return;
 			Vector2 velocity = body.velocity;
 			Vector2 scale = body.transform.localScale;
 			Action action = controller.getAction ();
@@ -59,10 +65,13 @@ public class DustCharecter : MonoBehaviour {
 
 		void OnCollisionEnter2D (Collision2D col) {
 			if (col.gameObject.tag == "hammer") {
-				var vel = this.body.velocity;
-				vel.y = 50f;
-				vel.x = Random.Range(-5f,  5f);
-				this.body.velocity = vel;
+				body.velocity = new Vector2 (0f, 0f);
+				body.gravityScale = 0.7f;
+				GetComponent<Collider2D> ().enabled = false;
+				GetComponent<SpriteRenderer> ().color = new Color (1f,1f,1f,0.3f);
+				animator.SetTrigger ("Hit");
+				alive = false;
+
 			};
 		}
 }

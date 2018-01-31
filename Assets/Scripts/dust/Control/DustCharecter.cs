@@ -50,7 +50,7 @@ public class DustCharecter : MonoBehaviour {
 				lastTurbo = Time.time;
 				animator.SetTrigger ("Turbo");
 			} else if (action == Action.STAY) {
-				velocity.x = 0;
+				velocity.x = velocity.x;
 			}
 			body.velocity = velocity;
 			scale.x = Mathf.Abs(scale.x) * facing;
